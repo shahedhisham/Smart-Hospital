@@ -23,6 +23,31 @@ const RequestMedicalExcuse = () => {
 
   const [filteredDoctors, setFilteredDoctors] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [submittedExcuses, setSubmittedExcuses] = useState([
+    // Sample data - in a real app this would come from an API
+    {
+      id: 1,
+      fullName: "Selim Abotaleb",
+      startDate: "2023-05-01",
+      endDate: "2023-05-05",
+      category: "Dentistry",
+      doctor: "Dr. Nourhan Mokhtar",
+      reason: "Dental surgery recovery",
+      status: "Approved",
+      submittedDate: "2023-04-28"
+    },
+    {
+      id: 2,
+      fullName: "Selim Abotaleb",
+      startDate: "2023-03-10",
+      endDate: "2023-03-15",
+      category: "Pediatrics",
+      doctor: "Prof. Dr. Magda Abdel Hamid",
+      reason: "Severe flu symptoms",
+      status: "Pending",
+      submittedDate: "2023-03-08"
+    }
+  ]);
 
   const handleCategoryChange = (e) => {
     const categoryId = e.target.value;
@@ -71,7 +96,39 @@ const RequestMedicalExcuse = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    
+    // Create a new excuse object
+    const newExcuse = {
+      id: submittedExcuses.length + 1,
+      fullName: formData.fullName,
+      startDate: formData.startDate,
+      endDate: formData.endDate,
+      category: categories.find(cat => cat.id === formData.category)?.name || "",
+      doctor: formData.doctor,
+      reason: formData.reason,
+      status: "Pending", // New requests start as pending
+      submittedDate: new Date().toISOString().split('T')[0] // Today's date
+    };
+    
+    // Add to the list of submitted excuses
+    setSubmittedExcuses([newExcuse, ...submittedExcuses]);
+    
+    // Reset the form
+    setFormData({
+      fullName: "",
+      email: "",
+      phone: "",
+      startDate: "",
+      endDate: "",
+      category: "",
+      doctor: "",
+      reason: "",
+      document: null
+    });
+    
+    setFilteredDoctors([]);
+    setSearchTerm("");
+    
     alert("Medical excuse request submitted successfully!");
   };
 
@@ -226,6 +283,38 @@ const RequestMedicalExcuse = () => {
           </button>
         </div>
       </form>
+
+      {/* Status Section */}
+      <div className="status-section">
+        <h2 className="status-title">Your Medical Excuse Requests</h2>
+        {submittedExcuses.length === 0 ? (
+          <p className="no-requests">No requests submitted yet.</p>
+        ) : (
+          <div className="excuse-list">
+            {submittedExcuses.map(excuse => (
+              <div key={excuse.id} className={`excuse-card ${excuse.status.toLowerCase()}`}>
+                <div className="excuse-card-header">
+                  <h3>{excuse.category} - {excuse.doctor}</h3>
+                  <span className={`status-badge ${excuse.status.toLowerCase()}`}>
+                    {excuse.status}
+                  </span>
+                </div>
+                <div className="excuse-card-details">
+                  <p><strong>Period:</strong> {excuse.startDate} to {excuse.endDate}</p>
+                  <p><strong>Reason:</strong> {excuse.reason}</p>
+                  <p><strong>Submitted on:</strong> {excuse.submittedDate}</p>
+                </div>
+                {excuse.status === "Approved" && (
+                  <div className="excuse-approved-message">
+                    <p>Your medical excuse has been approved.</p>
+                    <button className="download-btn">Download Excuse</button>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './doctorprofile.css';
 
 const MedicalExcuseDetails = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
+  const [approvalFile, setApprovalFile] = useState(null);
+  const [isApproving, setIsApproving] = useState(false);
+  const [rejectionReason, setRejectionReason] = useState('');
 
   // If no data is available, go back to previous page
   if (!state?.request) {
@@ -18,15 +21,36 @@ const MedicalExcuseDetails = () => {
     navigate(-1);
   };
 
+  const handleFileChange = (e) => {
+    setApprovalFile(e.target.files[0]);
+  };
+
   const handleAccept = () => {
-    // Add your acceptance logic here
-    alert('Medical excuse approved');
-    navigate(-1);
+    if (!approvalFile) {
+      alert('Please upload the approved medical excuse document');
+      return;
+    }
+
+    setIsApproving(true);
+    
+    // Here you would typically upload the file to your backend
+    // and update the request status in your database
+    // This is just a simulation
+    setTimeout(() => {
+      alert('Medical excuse approved and document uploaded');
+      setIsApproving(false);
+      navigate(-1);
+    }, 1500);
   };
 
   const handleReject = () => {
-    // Add your rejection logic here
-    alert('Medical excuse rejected');
+    if (!rejectionReason) {
+      alert('Please provide a reason for rejection');
+      return;
+    }
+
+    // Here you would typically send the rejection to your backend
+    alert(`Medical excuse rejected. Reason: ${rejectionReason}`);
     navigate(-1);
   };
 
@@ -76,12 +100,48 @@ const MedicalExcuseDetails = () => {
         </div>
       </div>
       
+      {/* Approval File Upload Section */}
+      <div className="details-section">
+        <h3>Approval Documentation</h3>
+        <div className="file-upload-section">
+          <label>
+            <strong>Upload Approved Excuse Document (PDF):</strong>
+            <input
+              type="file"
+              onChange={handleFileChange}
+              accept=".pdf"
+              className="file-input"
+            />
+          </label>
+          {approvalFile && (
+            <p className="file-info">
+              Selected file: {approvalFile.name} ({Math.round(approvalFile.size / 1024)} KB)
+            </p>
+          )}
+        </div>
+      </div>
+      
+      {/* Rejection Reason Section */}
+      <div className="details-section">
+        <h3>Rejection Reason</h3>
+        <textarea
+          value={rejectionReason}
+          onChange={(e) => setRejectionReason(e.target.value)}
+          placeholder="If rejecting, please provide a reason..."
+          className="rejection-textarea"
+        />
+      </div>
+      
       <div className="action-buttons">
         <button className="btn reject-btn" onClick={handleReject}>
           Reject Request
         </button>
-        <button className="btn accept-btn" onClick={handleAccept}>
-          Approve Request
+        <button 
+          className="btn accept-btn" 
+          onClick={handleAccept}
+          disabled={isApproving}
+        >
+          {isApproving ? 'Approving...' : 'Approve Request'}
         </button>
       </div>
     </div>
