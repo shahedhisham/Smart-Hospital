@@ -236,56 +236,7 @@ const DoctorProfile = () => {
                 <>
                   <p><strong>Name:</strong> {doctorData.name}</p>
                   <p><strong>Specialization:</strong> {doctorData.specialization}</p>
-                  <div className="editable-field">
-                    <strong>Title:</strong>
-                    <input
-                      type="text"
-                      name="title"
-                      value={doctorData.title}
-                      onChange={handleInputChange}
-                      className="edit-input"
-                    />
-                  </div>
-                  <div className="editable-field">
-                    <strong>Age:</strong>
-                    <input
-                      type="text"
-                      name="age"
-                      value={doctorData.age}
-                      onChange={handleInputChange}
-                      className="edit-input"
-                    />
-                  </div>
-                  <div className="editable-field">
-                    <strong>Experience:</strong>
-                    <input
-                      type="text"
-                      name="experience"
-                      value={doctorData.experience}
-                      onChange={handleInputChange}
-                      className="edit-input"
-                    />
-                  </div>
-                  <div className="editable-field">
-                    <strong>Education:</strong>
-                    <input
-                      type="text"
-                      name="education"
-                      value={doctorData.education}
-                      onChange={handleInputChange}
-                      className="edit-input"
-                    />
-                  </div>
-                  <div className="editable-field">
-                    <strong>Awards:</strong>
-                    <input
-                      type="text"
-                      name="awards"
-                      value={doctorData.awards}
-                      onChange={handleInputChange}
-                      className="edit-input"
-                    />
-                  </div>
+
                 </>
               ) : (
                 <>

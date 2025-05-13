@@ -247,7 +247,7 @@ const Step1 = ({ formData, setFormData, nextStep }) => {
   />
 </div>
 
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn-btn-primary">
           Continue
         </button>
 

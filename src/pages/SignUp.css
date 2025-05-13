@@ -155,7 +155,7 @@
   }
   
   /* تنسيق زرار Continue */
-  .btn-primary {
+  .btn-btn-primary {
     background-color: #a855f7; /* لون بنفسجي */
     color: white;
     font-size: 16px;
@@ -169,7 +169,7 @@
     transition: background-color 0.3s ease;
   }
   
-  .btn-primary:hover {
+  .btn-btn-primary:hover {
     background-color: #9333ea; /* لون أغمق عند التحويم */
   }
   
@@ -426,22 +426,22 @@
   
   /* لون زرار Previous في Step3 */
   .step3-buttons .btn-secondary {
-    background-color: #ccc;
-    color: black;
+    background-color:#660066;
+    color: rgb(255, 255, 255);
   }
   
   .step3-buttons .btn-secondary:hover {
-    background-color: #aaa;
+    background-color:#800080;
   }
   
   /* لون زرار Submit في Step3 */
   .step3-buttons .btn-primary {
-    background-color: #6a0dad;
+    background-color: #660066;
     color: white;
   }
   
   .step3-buttons .btn-primary:hover {
-    background-color: #5a0cad;
+    background-color: #800080;
   }
   /* ✅ إضافة خلفية لصفحة الـ SignUp */
   .signup-container {

@@ -31,26 +31,34 @@ const DoctorSignUp = () => {
     'Internal Medicine'
   ];
 
-  const [errors, setErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
+    const [errors, setErrors] = useState({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [passwordValidation, setPasswordValidation] = useState({
+      length: false,
+      uppercase: false,
+      number: false,
+      specialChar: false
     });
 
-    // Clear password error when typing
-    if (name === 'password' || name === 'confirmPassword') {
-      setErrors({
-        ...errors,
-        password: '',
-        confirmPassword: ''
-      });
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === 'checkbox' ? checked : value
+    });
+
+    // Validate password in real-time
+    if (name === 'password') {
+      const newValidation = {
+        length: value.length >= 8,
+        uppercase: /[A-Z]/.test(value),
+        number: /[0-9]/.test(value),
+        specialChar: /[!@#$%^&*(),.?":{}|<>]/.test(value)
+      };
+      setPasswordValidation(newValidation);
     }
   };
 
@@ -107,7 +115,10 @@ const DoctorSignUp = () => {
       setIsSubmitting(false);
     }
   };
-
+  const isPasswordValid = passwordValidation.length && 
+                         passwordValidation.uppercase && 
+                         passwordValidation.number && 
+                         passwordValidation.specialChar;
   return (
     <div className="employee-signup-container">
       <div className="employee-signup-box">
@@ -223,48 +234,74 @@ const DoctorSignUp = () => {
           </div>
 
           <div className="form-row">
-            <div className="form-group">
-              <label>Password*</label>
-              <div className="password-input-container">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  className={errors.password ? 'error' : ''}
-                  placeholder="Create a password"
-                />
-                <span
-                  className="password-toggle"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? '👁️' : '👁️‍🗨️'}
-                </span>
-              </div>
-              {errors.password && <span className="error-message">{errors.password}</span>}
-            </div>
-            
-            <div className="form-group">
-              <label>Confirm Password*</label>
-              <div className="password-input-container">
-                <input
-                  type={showConfirmPassword ? "text" : "password"}
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  className={errors.confirmPassword ? 'error' : ''}
-                  placeholder="Confirm your password"
-                />
-                <span
-                  className="password-toggle"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                >
-                  {showConfirmPassword ? '👁️' : '👁️‍🗨️'}
-                </span>
-              </div>
-              {errors.confirmPassword && <span className="error-message">{errors.confirmPassword}</span>}
-            </div>
-          </div>
+  <div className="form-group">
+    <label>Password*</label>
+    <div className="password-input-container">
+      <input
+        type={showPassword ? "text" : "password"}
+        name="password"
+        value={formData.password}
+        onChange={handleChange}
+        className={errors.password ? 'error' : ''}
+      />
+      <span
+        className="password-toggle"
+        onClick={() => setShowPassword(!showPassword)}
+        style={{
+          backgroundImage: `url(${showPassword ? "/eye-open.png" : "/eye-closed.png"})`,
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center'
+        }}
+      />
+    </div>
+    {errors.password && (
+      <span className="error-message">{errors.password}</span>
+    )}
+    {formData.password && !isPasswordValid && (
+      <div className="password-requirements">
+        <p className="password-requirement" style={{ color: passwordValidation.length ? 'green' : 'red' }}>
+          • At least 8 characters
+        </p>
+        <p className="password-requirement" style={{ color: passwordValidation.uppercase ? 'green' : 'red' }}>
+          • At least one uppercase letter
+        </p>
+        <p className="password-requirement" style={{ color: passwordValidation.number ? 'green' : 'red' }}>
+          • At least one number
+        </p>
+        <p className="password-requirement" style={{ color: passwordValidation.specialChar ? 'green' : 'red' }}>
+          • At least one special character
+        </p>
+      </div>
+    )}
+  </div>
+  
+  <div className="form-group">
+    <label>Confirm Password*</label>
+    <div className="password-input-container">
+      <input
+        type={showConfirmPassword ? "text" : "password"}
+        name="confirmPassword"
+        value={formData.confirmPassword}
+        onChange={handleChange}
+        className={errors.confirmPassword ? 'error' : ''}
+      />
+      <span
+        className="password-toggle"
+        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+        style={{
+          backgroundImage: `url(${showConfirmPassword ? "/eye-open.png" : "/eye-closed.png"})`,
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center'
+        }}
+      />
+    </div>
+    {errors.confirmPassword && (
+      <span className="error-message">{errors.confirmPassword}</span>
+    )}
+  </div>
+</div>
 
           <button
             type="submit"

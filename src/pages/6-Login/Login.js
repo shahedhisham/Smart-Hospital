@@ -153,7 +153,7 @@ const Login = () => {
             <button type="submit" className="login-submit-btn">Log In</button>
 
             <div className="login-signup-option">
-              <p className="login-signup-text">Or <Link to="/SignUp" className="login-signup-link">Sign Up</Link></p>
+              <p className="login-signup-text">Or <Link to="/SignUpSelection" className="login-signup-link">Sign Up</Link></p>
             </div>
           </form>
           <div className="login-test-credentials">

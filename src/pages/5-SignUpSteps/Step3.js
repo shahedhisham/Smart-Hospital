@@ -68,7 +68,7 @@ const Step3 = ({ formData, setFormData, prevStep, handleSubmit }) => {
         />
 
 <div className="step3-buttons">
-  <button type="button" className="btn btn-secondary" onClick={prevStep}>
+  <button type="button" className="btn-btn-secondary" onClick={prevStep}>
     Previous
   </button>
   <button type="submit" className="btn btn-primary">

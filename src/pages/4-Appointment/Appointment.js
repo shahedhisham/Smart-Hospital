@@ -79,7 +79,7 @@ const Appointment = () => {
   <nav className="navbar1">
     <ul className="nav-links1">
       <li><Link to="/">Home</Link></li>
-      <li><Link to="/about-us">About Us</Link></li>
+      <li><Link to="/about">About Us</Link></li>
       <li><Link to="/contact">Contact Us</Link></li>
     </ul>
     <div className="About-nav-right">
