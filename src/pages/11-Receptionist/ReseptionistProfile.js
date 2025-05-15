@@ -22,7 +22,6 @@ const ReceptionistProfile = () => {
   const [completedCrop, setCompletedCrop] = useState(null);
   const [receptionistData, setReceptionistData] = useState({
     name: "Sarah Johnson",
-    title: "Senior Receptionist",
     phone: "0110245378",
     id: "200010306",
     email: "sarah.johnson@clinic.com",
@@ -235,7 +234,6 @@ const ReceptionistProfile = () => {
 
                 <>
                   <p><strong>Name:</strong> {receptionistData.name}</p>
-                  <p><strong>Title:</strong> {receptionistData.title}</p>
                   <p><strong>Department:</strong> {receptionistData.department}</p>
                 </>
             </div>

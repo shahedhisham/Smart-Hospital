@@ -21,7 +21,6 @@ const DoctorProfile = () => {
   const [completedCrop, setCompletedCrop] = useState(null);
   const [doctorData, setDoctorData] = useState({
     name: "Dr. Ahmed Tharwat",
-    title: "Neurologist",
     phone: "01102470308",
     id: "200010305",
     email: "Doctorname@gmail.com",
@@ -29,7 +28,6 @@ const DoctorProfile = () => {
     specialization: "Neurologist",
     experience: "12 Years",
     education: "M.D. in Neurology, Harvard Medical School, 2010",
-    awards: "Top Neurologist Award by National Neurology Association",
     profileImage: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
   });
 
@@ -242,11 +240,9 @@ const DoctorProfile = () => {
                 <>
                   <p><strong>Name:</strong> {doctorData.name}</p>
                   <p><strong>Specialization:</strong> {doctorData.specialization}</p>
-                  <p><strong>Title:</strong> {doctorData.title}</p>
                   <p><strong>Age:</strong> {doctorData.age}</p>
                   <p><strong>Experience:</strong> {doctorData.experience}</p>
                   <p><strong>Education:</strong> {doctorData.education}</p>
-                  <p><strong>Awards:</strong> {doctorData.awards}</p>
                 </>
               )}
             </div>
