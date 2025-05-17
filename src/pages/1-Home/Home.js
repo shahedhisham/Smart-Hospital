@@ -238,7 +238,7 @@ const Home = () => {
         >
           <img src="twitter.png" alt="Twitter" />
         </a>
-        <a href="#" aria-label="Facebook" className="footer__social-icon">
+        <a href="https://m.facebook.com/themskuh" aria-label="Facebook" className="footer__social-icon">
           <img src="facebook.png" alt="Facebook" />
         </a>
       </div>

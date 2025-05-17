@@ -26,10 +26,8 @@ const PatientProfile = () => {
     email: "Selimabotaleb@gmail.com",
     phone: "01209914522",
     age: 22,
-    major: "Computer Science",
     id: "200013292",
     university: "Your University Name",
-    academicYear: "3rd Year",
     profileImage: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
   });
 
@@ -268,9 +266,7 @@ const PatientProfile = () => {
               <h3>Student Details</h3>
               <p><strong>Name:</strong> {patient.name}</p>
               <p><strong>Age:</strong> {patient.age}</p>
-              <p><strong>Major:</strong> {patient.major}</p>
               <p><strong>University:</strong> {patient.university}</p>
-              <p><strong>Academic Year:</strong> {patient.academicYear}</p>
             </div>
           </div>
         );
